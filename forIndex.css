@@ -1,0 +1,32 @@
+.task-block {
+    width: fit-content;
+    height: 3vh;
+    display: flex;
+    flex-wrap: nowrap;
+    border-radius: 5px;
+    margin-top: 1%;
+    padding: 1%;
+}
+
+.task-block:hover {
+    background-color: rgb(240, 236, 236);
+    cursor: pointer;
+}
+
+.task {
+    margin: auto 0 auto 4px;
+    display: inline-block;
+}
+
+#newTask {
+    border-radius: 5px;
+    height: 5vh;
+    width: 70%;
+}
+
+#buttonAddtask {
+    margin-left: 10px;
+    border-radius: 5px;
+    background-color: rgb(58, 135, 223);
+    color: white;
+}

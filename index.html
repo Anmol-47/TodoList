@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="forIndex.css">
+    <script>
+        let count = 0;
+        let task = document.getElementsByClassName("task");
+        let completed = document.getElementsByClassName("task-complete");
+        let toRemove = document.getElementsByClassName("mainBlock");
+        function createTaskBlock(index, taskText) {
+            return `<div class="mainBlock" style="margin: auto; display: flex; justify-content: space-between; width: 40%;">
+        <div class="task-block" onclick="taskDone(${index})">
+            <input class="task-complete" type="checkbox"></input>
+            <p class="task">${taskText}</p>
+        </div>
+        <input style="margin-top:2%; margin-left:2%" onclick="removeTask(${index})" type="button" value="x"></input>
+    </div>`;
+        }
+
+        function taskDone(i) {
+
+            if (task[i].style.textDecoration == "line-through") {
+                task[i].style.textDecoration = "none";
+                completed[i].checked = false;
+
+            } else {
+                task[i].style.textDecoration = "line-through";
+                completed[i].checked = true;
+            }
+            count = 0;
+            for (let j = 0; j < completed.length; j++) {
+                if (completed[j].checked == true) {
+                    count++;
+                }
+            }
+            document.getElementById("doneCounter").innerText = count;
+        }
+        function removeTask(i) {
+            toRemove[i].style.display = "none";
+            completed[i].checked = false;
+            count = 0;
+            for (let j = 0; j < completed.length; j++) {
+                if (completed[j].checked == true) {
+                    count++;
+                }
+            }
+            document.getElementById("doneCounter").innerText = count;
+        }
+        function addTask() {
+            if (document.getElementById("newTask").value != "") {
+                document.getElementById('taskContainer').insertAdjacentHTML('beforeend', createTaskBlock(task.length, document.getElementById("newTask").value));
+                document.getElementById("newTask").value = "";
+            }
+
+        }
+    </script>
+</head>
+
+<body style="font-family: Arial, Helvetica, sans-serif; height: 100%;">
+
+    <h4 style="text-align: center; font-family: Arial, Helvetica, sans-serif;">THINGS TO DO</h4>
+    <hr width="50%">
+
+    <div id="taskContainer">
+        <script>
+            document.getElementById('taskContainer').innerHTML += createTaskBlock(0, 'task 1');
+            document.getElementById('taskContainer').innerHTML += createTaskBlock(1, 'task 2');
+            document.getElementById('taskContainer').innerHTML += createTaskBlock(2, 'task 3');
+        </script>
+    </div>
+
+    <hr width="50%">
+    <div style=" width: fit-content; display: flex; margin: auto;">
+        <h4>DONE : &nbsp;</h4>
+        <h4 id="doneCounter">0</h4>
+    </div>
+
+    <div style=" width: fit-content; display: flex; margin: auto;">
+        <input id="newTask" type="text" placeholder="Enter new task"></input>
+        <input id="buttonAddtask" onclick="addTask()" type="button" value="Add task">
+    </div>
+</body>
+
+</html>
